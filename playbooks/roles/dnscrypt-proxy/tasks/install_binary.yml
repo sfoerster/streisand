@@ -1,0 +1,16 @@
+---
+- name: build filename of file to be downloaded
+  set_fact:
+    dnscrypt_proxy_file: "{{ vars['dnscrypt_proxy_'+device_arch+'_binary'] }}"
+
+- name: download correct file for device
+  get_url:
+    url: "{{ dnscrypt_proxy_base_url }}{{ dnscrypt_proxy_file }}"
+    dest: "/tmp/{{ dnscrypt_proxy_file }}"
+    #checksum: "{{ dnscrypt_proxy_file_checksum }}"
+
+- name: extract dnscrypt_proxy into /usr/local/bin
+  unarchive:
+    src: "/tmp/{{ dnscrypt_proxy_file }}"
+    dest: "{{ dnscrypt_proxy_bin_location }}"
+    remote_src: yes

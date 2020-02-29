@@ -1,0 +1,26 @@
+---
+- name: build filename of file to be downloaded
+  set_fact:
+    dnscrypt_proxy_file: "{{ vars['dnscrypt_proxy_'+device_arch+'_'+ansible_pkg_mgr] }}"
+
+- name: download correct file for device
+  get_url:
+    url: "{{ dnscrypt_proxy_base_url }}{{ dnscrypt_proxy_file }}"
+    dest: "/tmp/{{ dnscrypt_proxy_file }}"
+    #checksum: "{{ dnscrypt_proxy_file_checksum }}"
+
+- name: Install a .deb package
+  apt:
+    deb: "/tmp/{{ dnscrypt_proxy_file }}"
+    state: present
+  register: pkg_mgr_output
+  ignore_errors: true
+  when: ansible_pkg_mgr == 'apt'
+
+- name: Install a .rpm package
+  yum:
+    name: "/tmp/{{ dnscrypt_proxy_file }}"
+    state: present
+  register: pkg_mgr_output
+  ignore_errors: true
+  when: ansible_pkg_mgr == 'yum'

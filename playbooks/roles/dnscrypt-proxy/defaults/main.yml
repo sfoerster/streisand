@@ -1,0 +1,19 @@
+---
+dnscrypt_proxy_base_url: "https://bin.equinox.io/c/VdrWdbjqyF/"
+
+dnscrypt_proxy_amd64_apt: "dnscrypt_proxy-stable-linux-amd64.deb"
+dnscrypt_proxy_amd64_yum: "dnscrypt_proxy-stable-linux-amd64.rpm"
+dnscrypt_proxy_amd64_binary: "dnscrypt_proxy-stable-linux-amd64.tgz"
+dnscrypt_proxy_arm_apt: "dnscrypt_proxy-stable-linux-arm.deb"
+dnscrypt_proxy_arm_yum: "dnscrypt_proxy-stable-linux-arm.rpm"
+dnscrypt_proxy_arm_binary: "dnscrypt_proxy-stable-linux-arm.tgz"
+
+dnscrypt_proxy_allow_firewall: false
+dnscrypt_proxy_enable_service: true
+dnscrypt_proxy_upstream1: "https://1.1.1.1/dns-query"
+dnscrypt_proxy_upstream2: "https://1.0.0.1/dns-query"
+dnscrypt_proxy_port: 5053
+
+dnscrypt_proxy_options: "proxy-dns --port {{ dnscrypt_proxy_port }} --upstream {{ dnscrypt_proxy_upstream1 }} --upstream {{ dnscrypt_proxy_upstream2 }}"
+
+dnscrypt_proxy_bin_location: /usr/local/bin

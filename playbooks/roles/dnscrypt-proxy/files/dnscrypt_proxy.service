@@ -1,0 +1,15 @@
+[Unit]
+Description=dnscrypt_proxy service
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+User=dnscrypt_proxy
+EnvironmentFile=/etc/default/dnscrypt_proxy
+ExecStart=/usr/local/bin/dnscrypt_proxy $DNSCRYPT_PROXY_OPTS
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
